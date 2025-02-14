@@ -3,7 +3,7 @@ import { Button } from "../ui/button";
 
 const Navbar = () => {
   return (
-    <div className="flex sm:w-[80vw] justify-between w-[100vw] items-center border border-[#197686] rounded-[24px] py-8 px-4 bg-[rgba(5,37,44,0.40)] backdrop-blur-[2px]  ">
+    <div className="flex sm:w-[80vw] justify-between w-[95vw] items-center border border-[#197686] rounded-[24px] py-4 sm:py-8 px-4 bg-[rgba(5,37,44,0.40)] backdrop-blur-[2px]   ">
       <div className="flex items-center gap-2 ">
         <div className="border border-[ #0E464F] bg-[#052F35] flex items-center justify-center py-1.5 px-2 rounded-[10px]">
           <img src="/assets/logo-icon.svg" alt="logo" />

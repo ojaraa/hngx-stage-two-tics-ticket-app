@@ -10,6 +10,7 @@ import axios from "axios";
 import { useState } from "react";
 import LoaderComponent from "./shared/loader-component";
 import { AlertDialog } from "./ui/alert-dialog";
+import { ToastContainer } from "react-toastify";
 
 const CLOUDINARY_URL = import.meta.env.VITE_CLOUDINARY_URL;
 const UPLOAD_PRESET = import.meta.env.VITE_UPLOAD_PRESET;
@@ -27,8 +28,11 @@ const AttendeeDetails = ({ handleNext, handleCancel }: selectProps) => {
   const { Dragger } = Upload;
   const attachments = watch("attachments", []);
 
-//   const data = getValues();
-//   console.log(data);
+  const {
+    formState: { errors },
+  } = useFormContext();
+
+  console.log(errors);
 
   const handleOnchange = ({ fileList }: { fileList: UploadFile[] }) => {
     setValue("attachments", fileList, { shouldValidate: true });
@@ -157,7 +161,11 @@ const AttendeeDetails = ({ handleNext, handleCancel }: selectProps) => {
                               size={15}
                             />
                           </button>
+
                         </div>
+                        
+
+                        
                       )}
                     </div>
                   )}
@@ -176,11 +184,17 @@ const AttendeeDetails = ({ handleNext, handleCancel }: selectProps) => {
                       </div>
                     </div>
                   )}
+                 
                 </Dragger>
               )}
             />
           </div>
         </div>
+        {errors.imageURL && (
+                    <p className="text-red-400 font-roboto pt-4 text-center">
+                      {errors?.imageURL?.message?.toString()}
+                    </p>
+                  )}
 
         <div className="bg-[#07373F] h-1 w-full my-8"></div>
 
@@ -217,7 +231,6 @@ const AttendeeDetails = ({ handleNext, handleCancel }: selectProps) => {
                     <div className="flex items-center gap-x-1 border border-[#07373f] pl-3 rounded-xl !mt-2">
                       <Mail />
                       <Input
-                      
                         {...field}
                         placeholder="name@email.com"
                         className="font-roboto !border-0 !outline-0 focus-visible:ring-0 focus-visible:ring-[#08252B]  !shadow-none"
@@ -266,6 +279,7 @@ const AttendeeDetails = ({ handleNext, handleCancel }: selectProps) => {
           </Button>
         </div>
       </div>
+      <ToastContainer />
     </>
   );
 };

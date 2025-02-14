@@ -1,17 +1,18 @@
+import { useNavigate } from "react-router-dom";
 import { Button } from "./ui/button";
 
 type selectProps = {
   handleNext: () => void;
-  handleCancel: () => void;
+ 
 };
-const BookedTicket = ({ handleNext, handleCancel }: selectProps) => {
+const BookedTicket = ({ handleNext }: selectProps) => {
   const ticketData = localStorage.getItem("formData");
   const savedData = ticketData ? JSON.parse(ticketData) : null;
   const bars = [
     3, 1, 4, 2, 5, 1, 3, 2, 4, 2, 1, 3, 5, 2, 4, 3, 1, 2, 5, 4, 5, 1, 3, 2, 4,
     2, 1,
   ];
-
+  const navigate = useNavigate()
   return (
     <div className="flex flex-col items-center justify-center p-1 sm:p-12 ">
       <p className="font-alatsi text-white text-center text-[32px] font-normal pb-4">
@@ -22,9 +23,7 @@ const BookedTicket = ({ handleNext, handleCancel }: selectProps) => {
         Check your email for a copy or you can download
       </p>
 
-      {/* <div className="w-[300px] h-auto sm:h-[466px] border border-[#24a0b5] bg-[rgba(3,30,33,0.10)] p-[20px] rounded-t-[-50px] my-16">
-        
-      </div> */}
+     
       <div className="relative my-16">
         <img
           src="/assets/bg.svg"
@@ -32,7 +31,7 @@ const BookedTicket = ({ handleNext, handleCancel }: selectProps) => {
           className="w-full h-full object-cover"
         />
         <div className="absolute top-[35px] left-[20px] right-[20px]  rounded-2xl border flex flex-col items-center justify-center border-[#24a0b5]  p-4 h-[380px] sm:h-[430px] ">
-          <div className="absolute top-2 ">
+          <div className="absolute top-[20px] ">
             <div className="grid gap-y-2">
               <p className="text-center text-[34px] font-normal leading-[30px] text-[#FAFAFA] !font-roadrage ">
                 Techember Fest ”25
@@ -45,7 +44,7 @@ const BookedTicket = ({ handleNext, handleCancel }: selectProps) => {
               </p>
             </div>
 
-            <div className=" flex items-center justify-center my-[20px] h-[120px] w-[120px] sm:h-[130px] sm:w-[130px] mx-auto">
+            <div className=" flex items-center justify-center my-[20px] h-[130px] w-[130px] sm:h-[130px] sm:w-[130px] mx-auto">
               <img
                 src={savedData?.imageURL}
                 alt=""
@@ -111,7 +110,7 @@ const BookedTicket = ({ handleNext, handleCancel }: selectProps) => {
             </div>
           </div>
 
-          <div className="absolute bottom-[-100px] sm:bottom-[-135px] ">
+          <div className="absolute bottom-[-170px] sm:bottom-[-135px] ">
             <div className="barcode">
               {bars.map((width, index) => (
                 <div key={index} style={{ width: `${width}px`  }} className="h-[50px] sm:h-[70px]"></div>
@@ -125,7 +124,7 @@ const BookedTicket = ({ handleNext, handleCancel }: selectProps) => {
       <div className="grid gap-4 sm:gap-6  items-center grid-cols-1 sm:grid-cols-2   ">
         <Button
           className="bg-transparent border border-[#24A0B5] rounded-lg !py-6 w-[242px]"
-          onClick={handleCancel}
+          onClick={() => navigate('/')}
         >
           Book Another Ticket
         </Button>

@@ -22,19 +22,17 @@ const ticketOptions = [
 ];
 
 const TicketSelection = ({ handleNext, handleCancel }: selectProps) => {
-
   const {
     control,
-    // formState: { errors },
+    formState: { errors },
     watch,
-    getValues,
     setValue,
   } = useFormContext();
 
   const selectedTicket = watch("ticketType");
 
-  const data = getValues()
-  console.log(data)
+  // const data = getValues();
+  console.log(errors);
 
   return (
     <div className=" border rounded-[32px] bg-[#08252B] border-[#0E464F] p-6  ">
@@ -48,7 +46,7 @@ const TicketSelection = ({ handleNext, handleCancel }: selectProps) => {
           <p className="text-center text-5xl sm:text-[62px] font-normal leading-[62px] text-[#FAFAFA] !font-roadrage ">
             Techember Fest ”25
           </p>
-          <p className=" text-sm sm:text-base leading-6 font-normal font-roboto text-[#FAFAFA] text-center w-[340px]">
+          <p className=" text-sm sm:text-base leading-6 font-normal font-roboto text-[#FAFAFA] text-center w-auto sm:w-[340px]">
             Join us for an unforgettable experience at HNG Meetup! Secure your
             spot now.
           </p>
@@ -59,6 +57,8 @@ const TicketSelection = ({ handleNext, handleCancel }: selectProps) => {
       </div>
 
       <div className="bg-[#07373F] h-1 w-full my-8"></div>
+
+     
 
       <div className="">
         <p className="text-[#FAFAFA] font-roboto font-normal leading-6 pb-2">
@@ -71,7 +71,7 @@ const TicketSelection = ({ handleNext, handleCancel }: selectProps) => {
               key={ticket.id}
               className={`rounded-xl border-2 p-3 cursor-pointer transition-all ${
                 selectedTicket?.id === ticket?.id
-                  ? "border-[#197686] bg-[#12464E]" 
+                  ? "border-[#197686] bg-[#12464E]"
                   : "border-[#197686] bg-[#041E23]"
               }`}
               onClick={() => setValue("ticketType", ticket)}
@@ -88,9 +88,15 @@ const TicketSelection = ({ handleNext, handleCancel }: selectProps) => {
             </div>
           ))}
         </div>
-
-   
+        {errors.ticketType && (
+          <p className="text-red-400 font-roboto pt-4 text-center font-[10px] py-4">
+            {errors?.ticketType?.message?.toString()}
+          </p>
+        )}
+       
       </div>
+
+      
 
       <div className="my-8">
         <p className="text-[#FAFAFA] font-roboto font-normal leading-6 pb-2">
@@ -98,31 +104,29 @@ const TicketSelection = ({ handleNext, handleCancel }: selectProps) => {
           Number of Tickets
         </p>
 
-
-  <FormField
-      name='ticketNumber'
-      control={control}
-      render={({ field }) => (
-        <FormItem>
-          <FormControl>
-          <Select onValueChange={field.onChange} >
-          <SelectTrigger className="w-full">
-            <SelectValue placeholder="1" />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="1">1</SelectItem>
-            <SelectItem value="2">2</SelectItem>
-            <SelectItem value="3">3</SelectItem>
-            <SelectItem value="4">4</SelectItem>
-            <SelectItem value="5">5</SelectItem>
-          </SelectContent>
-        </Select>
-          </FormControl>
-          <FormMessage/>
-        </FormItem>
-      )}
-  />
-       
+        <FormField
+          name="ticketNumber"
+          control={control}
+          render={({ field }) => (
+            <FormItem>
+              <FormControl>
+                <Select onValueChange={field.onChange}>
+                  <SelectTrigger className="w-full">
+                    <SelectValue placeholder="1" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="1">1</SelectItem>
+                    <SelectItem value="2">2</SelectItem>
+                    <SelectItem value="3">3</SelectItem>
+                    <SelectItem value="4">4</SelectItem>
+                    <SelectItem value="5">5</SelectItem>
+                  </SelectContent>
+                </Select>
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
       </div>
 
       <div className="grid  gap-4 sm:gap-6 items-center grid-cols-1 sm:grid-cols-2">

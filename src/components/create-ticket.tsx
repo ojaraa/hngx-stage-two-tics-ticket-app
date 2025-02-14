@@ -1,4 +1,4 @@
-import {  useState } from "react";
+import { useState } from "react";
 import { Tabs, TabsContent } from "./ui/tabs";
 import TicketSelection from "./ticket-selection";
 import AttendeeDetails from "./attendee-details";
@@ -10,6 +10,7 @@ import {
 import { FormProvider, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { UploadFile } from "antd";
+
 
 const createTicketSteps = [
   {
@@ -40,7 +41,7 @@ const CreateTicket = () => {
     email: "",
     ticketNumber: "",
     specialRequest: "",
-    imageURL: "fggrr",
+    imageURL: "",
     attachments: [] as UploadFile[],
     ticketType: {
       id: "",
@@ -56,39 +57,33 @@ const CreateTicket = () => {
     defaultValues: ticketDefaultValues,
   });
 
-  // const {setValue} = methods
-  const dataa = methods.getValues()
-  console.log('data' , dataa)
+
+
 
   const createNewTicket = () => {
     const ticketData = methods.getValues();
-    localStorage.removeItem("formData"); 
+    localStorage.removeItem("formData");
     localStorage.setItem("formData", JSON.stringify(ticketData));
 
-    console.log("Submitted Data:", ticketData);
+ 
   };
 
+
+  
   const handleNext = async () => {
     const isValid = await methods.trigger();
     if (isValid) {
       if (activeStep === 1) {
-        createNewTicket();}
-        // Move to the next step
-    const newStepsValidity = [...stepsValidity];
-    newStepsValidity[activeStep] = true;
-    setStepsValidity(newStepsValidity);
+        createNewTicket();
+      }
 
-    // Proceed to the next step
-    setActiveStep((prev) => prev + 1);
+      const newStepsValidity = [...stepsValidity];
+      newStepsValidity[activeStep] = true;
+      setStepsValidity(newStepsValidity);
 
-
-      // } else {
-      //   const newStepsValidity = [...stepsValidity];
-      //   newStepsValidity[activeStep] = true;
-      //   setStepsValidity(newStepsValidity);
-      //   setActiveStep((prev) => prev + 1);
-      // }
+      setActiveStep((prev) => prev + 1);
     }
+  
   };
 
   const handleCancel = () => {
@@ -99,20 +94,13 @@ const CreateTicket = () => {
   };
   const currentStep = createTicketSteps[activeStep];
 
-  // useEffect(() => {
-  //   const savedData = localStorage.getItem("formData");
-  //   if (savedData) {
-  //     const parsedData = JSON.parse(savedData);
-  //     Object.keys(parsedData).forEach((key) => {
-  //       setValue(key, parsedData[key]); 
-  //     });
-  //   }
-  // }, [setValue]);
+
+
 
   return (
     <FormProvider {...methods}>
-      <div className="flex flex-col w-[100vw] mx-2 sm:w-[700px] bg-[#041E23] border border-[#0E464F] rounded-[40px] p-6 sm:p-12">
-        {/* {createTicketSteps.map((step) => ( */}
+      <div className="flex flex-col w-[95vw] mx-2 sm:w-[45vw] bg-[#041E23] border border-[#0E464F] rounded-[40px] p-6 sm:p-12">
+     
         <div className="grid gap-3 pb-6">
           <div className="flex items-center  gap-y-3 justify-between">
             <p className=" text-2xl sm:text-[32px] font-normal leading-0 ">
@@ -129,7 +117,7 @@ const CreateTicket = () => {
             }}
           ></div>
         </div>
-        {/* ))} */}
+ 
 
         <form onSubmit={methods.handleSubmit(handleNext)}>
           <Tabs value={createTicketSteps[activeStep].value}>
@@ -150,7 +138,7 @@ const CreateTicket = () => {
             <TabsContent value="ticket-ready">
               <BookedTicket
                 handleNext={handleNext}
-                handleCancel={handleCancel}
+             
               />
             </TabsContent>
           </Tabs>
