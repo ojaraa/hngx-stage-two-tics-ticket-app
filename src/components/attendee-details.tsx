@@ -147,7 +147,7 @@ const AttendeeDetails = ({ handleNext, handleCancel }: selectProps) => {
                               size={15}
                             />
                             <p className="font-roboto text-white">
-                              Upload to cloudinary
+                            Click to Upload to cloudinary
                             </p>
                           </button>
 

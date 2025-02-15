@@ -121,15 +121,15 @@ const BookedTicket = ({ handleNext }: selectProps) => {
         </div>
       </div>
 
-      <div className="grid gap-4 sm:gap-6  items-center grid-cols-1 sm:grid-cols-2   ">
+      <div className="grid gap-4 sm:gap-6  items-center grid-cols-1 sm:grid-cols-2  ">
         <Button
-          className="bg-transparent border border-[#24A0B5] rounded-lg !py-6 w-[242px]"
+          className="bg-transparent border border-[#24A0B5] rounded-lg !py-6 "
           onClick={() => navigate('/')}
         >
           Book Another Ticket
         </Button>
         <Button
-          className="bg-[#24A0B5] border border-[#24A0B5] rounded-lg !py-6 w-[242px]"
+          className="bg-[#24A0B5] border border-[#24A0B5] rounded-lg !py-6 w-[170px] "
           onClick={handleNext}
         >
           Download Ticket

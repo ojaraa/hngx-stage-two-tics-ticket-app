@@ -99,7 +99,7 @@ const CreateTicket = () => {
 
   return (
     <FormProvider {...methods}>
-      <div className="flex flex-col w-[95vw] mx-2 sm:w-[45vw] bg-[#041E23] border border-[#0E464F] rounded-[40px] p-6 sm:p-12">
+      <div className="flex flex-col w-[95vw] mx-2 sm:w-[45vw] bg-[#041E23] border border-[#0E464F] rounded-[40px] p-6 sm:p-12 md:max-lg:w-[75vw]">
      
         <div className="grid gap-3 pb-6">
           <div className="flex items-center  gap-y-3 justify-between">
